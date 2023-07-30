@@ -39,3 +39,7 @@ __pycache__
 # === Site build ===
 /static/css
 /static/js
+/public
+
+# Local Netlify folder
+.netlify
