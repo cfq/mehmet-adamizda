@@ -1,6 +1,5 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 
 module.exports = {
   mode: 'none',
@@ -31,13 +30,13 @@ module.exports = {
         use: [
           MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader', // translates CSS into CommonJS
+            loader: 'css-loader',
             options: {
               url: false
             },
           },
           {
-            loader: 'sass-loader', // compiles Sass to CSS
+            loader: 'sass-loader',
             options: {
               sassOptions: {
                 outputStyle: 'compressed'
