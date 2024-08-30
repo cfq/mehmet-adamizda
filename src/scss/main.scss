@@ -1,4 +1,3 @@
-@import 'normalise';
 @import 'typography';
 
 html, body {
@@ -6,13 +5,14 @@ html, body {
   font-size: 1em;
   line-height: 1.4em;
   height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 body {
   background: linear-gradient(-45deg, #ff9f82, #ee2975, #5fb7d7, #23d5ab);
   animation: gradient 15s ease infinite;
 	background-size: 400% 400%;
-	height: 100vh;
 }
 
 @keyframes gradient {
