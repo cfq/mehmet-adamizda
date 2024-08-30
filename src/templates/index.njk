@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="tr" class="{{ mehmet }}">
+<html lang="{{ language }}" class="{{ mehmet }}">
 
 <head>
   <title>Mehmet Adamızda mı?</title>
-  <meta name="description" content="Mehmet Adamızda mı? {{
-    "Adamızda!" if mehmet == 'adamizda' else "Adamızda değil :("
+  <meta name="description" content="{{
+    islandDesc if mehmet == 'adamizda' else notIslandDesc
   }}">
 
   <meta charset="UTF-8">
@@ -14,15 +14,13 @@
 </head>
 <body>
   <main>
-    {% if mehmet == 'adamizda' %}
+    {% if mehmet == 'adamizda' -%}
       <p class="adamizda-text">
-        Mehmet Adam&inodot;zda &#127965;&#65039;
-      </p>
+        {{- islandText | escape }} &#127965;&#65039;</p>
     {% else %}
       <p class="adamizda-degil-text">
-        Mehmet Adam&inodot;zda de&gbreve;il &#129394;
-      </p>
-    {% endif %}
+        {{- notIslandText | escape }} &#129394;</p>
+    {% endif -%}
   </main>
 </body>
 </html>
