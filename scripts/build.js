@@ -1,6 +1,7 @@
-const fs = require('fs-extra');
-const nunjucks = require('nunjucks');
-const fetch = require('node-fetch');
+import { existsSync, mkdirSync, writeFileSync, cpSync } from 'fs';
+import nunjucks from 'nunjucks';
+import fetch from 'node-fetch';
+import * as sass from 'sass';
 
 async function fetchAdamiz() {
   const response = await fetch('https://4s7kcwiwv2.execute-api.us-east-1.amazonaws.com/dev/get-adamiz');
@@ -16,12 +17,18 @@ async function build() {
 
   const indexFile = nunjucks.render('src/templates/index.njk', { 'mehmet': adamizdami });
 
-  if (!fs.existsSync('public')) {
-    fs.mkdirSync('public');
+  if (!existsSync('public')) {
+    mkdirSync('public');
   }
-  fs.writeFileSync('public/index.html', indexFile);
+  writeFileSync('public/index.html', indexFile);
 
-  fs.copySync('static', 'public/static');
+  const compiledCSS = sass.compile("src/scss/main.scss", {style: "compressed"});
+  if(!existsSync('static/css')){
+    mkdirSync('static/css');
+  }
+  writeFileSync('static/css/styles.css', compiledCSS.css);
+
+  cpSync('static', 'public/static', {recursive: true});
 }
 
 build();

@@ -3,34 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "webpack.config.js",
+  "type": "module",
   "scripts": {
-    "build": "webpack --mode production && node scripts/build.js",
-    "clean": "rimraf public static/css static/js",
-    "dev": "npm run clean && webpack-dev-server"
+    "build": "node scripts/build.js",
+    "clean": "rimraf public static/css",
+    "dev": "npm run clean"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.21.4",
-    "babel-loader": "^9.1.2",
-    "babel-preset-env": "^1.7.0",
-    "css-loader": "^6.7.3",
-    "css-minimizer-webpack-plugin": "^5.0.0",
-    "fs-extra": "^11.1.1",
-    "js-yaml": "^4.1.0",
-    "mapbox-gl": "^2.14.1",
-    "mini-css-extract-plugin": "^2.7.5",
-    "node-fetch": "^2.6.12",
+    "fs-extra": "^11.2.0",
+    "node-fetch": "^3.3.2",
     "normalize.css": "^8.0.1",
-    "npm-run-all": "^4.1.5",
     "nunjucks": "^3.2.4",
-    "rimraf": "^5.0.0",
-    "sass": "^1.64.1",
-    "sass-loader": "^13.3.2",
-    "style-loader": "^3.3.2",
-    "webpack": "^5.81.0",
-    "webpack-cli": "^5.0.2",
-    "webpack-dev-middleware": "^6.0.2",
-    "webpack-dev-server": "^4.13.3"
+    "rimraf": "^6.0.1",
+    "sass": "^1.77.8"
   }
 }
