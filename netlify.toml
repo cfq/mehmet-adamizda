@@ -7,3 +7,9 @@
 
 [build.processing]
   skip_processing = true
+
+[redirects]
+  from = "https://adamiz.mehmet.dev"
+  to = "https://mehmet.adamizda.com"
+  status = 301
+  force = true
