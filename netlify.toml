@@ -13,3 +13,17 @@
   to = "https://mehmet.adamizda.com"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/"
+  to = "/index-tr.html"
+  status = 200
+  force = true
+  conditions = { Language = ["tr"] }
+
+[[redirects]]
+  from = "/"
+  to = "/index.html"
+  status = 200
+  force = true
+
