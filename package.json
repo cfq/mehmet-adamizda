@@ -7,16 +7,11 @@
   "scripts": {
     "build": "node scripts/build.js",
     "clean": "rimraf public static/css",
-    "dev": "yarn clean && yarn build && http-server"
+    "dev": "yarn clean && yarn build && netlify dev"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "fs-extra": "^11.2.0",
-    "http-server": "^14.1.1",
-    "node-fetch": "^3.3.2",
-    "normalize.css": "^8.0.1",
-    "nunjucks": "^3.2.4",
     "rimraf": "^6.0.1",
     "sass": "^1.79.5"
   }

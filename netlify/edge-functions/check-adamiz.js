@@ -1,10 +1,25 @@
-import nunjucks from 'nunjucks';
+const replacements = {
+  'R_HTML_CLASS': {
+    'adamizda': 'adamizda',
+    'adamizda-degil': 'adamizda-degil'
+  },
+  'R_DESCRIPTION': {
+    'adamizda': 'Adamızda!',
+    'adamizda-degil': 'Adamızda değil :('
+  },
+  'R_P_CLASS': {
+    'adamizda': 'adamizda-text',
+    'adamizda-degil': 'adamizda-degil-text'
+  },
+  'R_P_TEXT': {
+    'adamizda': 'Mehmet Adam&inodot;zda &#127965;&#65039;',
+    'adamizda-degil': 'Mehmet Adam&inodot;zda de&gbreve;il &#129394;'
+  }
+};
 
 async function fetchAdamiz() {
   const response = await fetch('https://4s7kcwiwv2.execute-api.us-east-1.amazonaws.com/dev/get-adamiz');
   const data = await response.json();
-
-  console.log(data.message);
 
   return data.message === 'ADAMIZDA' ? 'adamizda' : 'adamizda-degil';
 }
@@ -15,13 +30,10 @@ export default async (request, context) => {
   const page = await response.text();
   const inAdamiz = adamizdami == "adamizda";
 
-  const replacedPage = page
-    .replace('R_HTML_CLASS', adamizdami)
-    .replace('R_DESCRIPTION', inAdamiz ? 'Adamızda!' : "Adamızda değil :(")
-    .replace('R_P_CLASS', inAdamiz ? 'adamizda-text' : "adamizda-degil-text")
-    .replace('R_P_TEXT', inAdamiz ?
-                            'Mehmet Adam&inodot;zda &#127965;&#65039;' :
-                            "Mehmet Adam&inodot;zda de&gbreve;il &#129394;")
+  const replacedPage = Object.entries(replacements).reduce((prev, entry) => {
+    const [key, values] = entry;
+    return prev.replace(key, values[adamizdami])
+  }, page);
 
   return new Response(
     replacedPage,
