@@ -18,17 +18,28 @@ const replacements = {
 };
 
 async function fetchAdamiz() {
-  const response = await fetch('https://4s7kcwiwv2.execute-api.us-east-1.amazonaws.com/dev/get-adamiz');
-  const data = await response.json();
+  const adamizServiceURL = 'https://4s7kcwiwv2.execute-api.us-east-1.amazonaws.com/dev/get-adamiz';
+  try {
+    const response = await fetch(adamizServiceURL);
+    if( response.ok ){
+      const data = await response.json();
+      return data.message === 'ADAMIZDA' ? 'adamizda' : 'adamizda-degil';
+    } else {
+      console.error('HTTP Response not OK', response);
+    }
+  } catch( error ) {
+    console.error('Fetch failed', error);
+  }
 
-  return data.message === 'ADAMIZDA' ? 'adamizda' : 'adamizda-degil';
+  // On failure, Mehmet adamizda.
+  return 'adamizda';
 }
 
 export default async (request, context) => {
   const adamizdami = await fetchAdamiz();
   const response = await context.next();
   const page = await response.text();
-  const inAdamiz = adamizdami == "adamizda";
+  const inAdamiz = adamizdami === "adamizda";
 
   const replacedPage = Object.entries(replacements).reduce((prev, entry) => {
     const [key, values] = entry;
